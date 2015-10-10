@@ -20,7 +20,7 @@ $menu-font-size: 14px;
   a {
     display: block;
     padding: 8px 15px;
-    font-size: 14px;
+    font-size: $menu-font-size;
     text-decoration: none;
     color: $menu-color;
   }
