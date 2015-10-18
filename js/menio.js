@@ -24,10 +24,3 @@
     }
   };
 });
-
-var parametru = {
-  element: '.menio',
-  breakpoint: 800
-}
-
-var meniu = new menio(parametru);
