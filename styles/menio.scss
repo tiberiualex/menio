@@ -6,6 +6,12 @@ $menu-font-size: 14px;
   font-family: Helvetica, Arial, sans-serif;
   line-height: 1;
   background-color: $menu-bg;
+  display: flex;
+  flex-flow: row wrap;
+
+  &.mobile {
+    flex-flow: column wrap;
+  }
 
   &, ul {
     padding: 0;
@@ -14,7 +20,7 @@ $menu-font-size: 14px;
   }
 
   > li {
-  	display: block;
+  	
   }
 
   a {

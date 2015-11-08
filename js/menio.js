@@ -4,23 +4,51 @@
   var Menio = function Menio(options) {
     this.element = document.querySelector(options.element);
     this.breakpoint = options.breakpoint;
+    this.autoBreakpoint = false;
     this.init();
-  }
+  };
 
-  window['Menio'] = Menio;
+  window.Menio = Menio;
 
   Menio.prototype.init = function() {
     this.switchView();
+    this.addBindings();
+  };
 
-    window.addEventListener('resize', this.switchView.bind(this));
+  Menio.prototype.addBindings = function() {
+    window.addEventListener('resize', (function() {
+      var _this = this;
+      var wait = false;
+      return function() {
+        if (!wait) {
+          _this.switchView();
+          wait = true;
+          setTimeout(function() {
+            wait = false;
+          }, 150);
+        }
+      }
+    }).call(this));
   };
 
   Menio.prototype.switchView = function() {
-    if (window.innerWidth() < this.breakpoint) {
-      this.element.classList.add('mobile');
+    if (this.breakpoint !== 'auto') {
+      var width = this.autoBreakpoint ? this.element.offsetWidth : window.innerWidth;
+
+      if (width < this.breakpoint) {
+        this.element.classList.add('mobile');
+      }
+      else {
+        this.element.classList.remove('mobile');
+      }
     }
     else {
-      this.element.classList.removeClass('mobile');
+      this.autoBreakpoint = true;
+      this.breakpoint = 0;
+
+      for (var i = 0; i < this.element.children.length; i++) {
+        this.breakpoint += this.element.children[i].offsetWidth;
+      }
     }
   };
-});
+})();
