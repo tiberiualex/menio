@@ -1,21 +1,21 @@
 ;(function() {
   'use strict';
 
-  var menio = function menio(options) {
+  var Menio = function Menio(options) {
     this.element = document.querySelector(options.element);
     this.breakpoint = options.breakpoint;
     this.init();
   }
 
-  window['menio'] = menio;
+  window['Menio'] = Menio;
 
-  menio.prototype.init = function() {
+  Menio.prototype.init = function() {
     this.switchView();
 
     window.addEventListener('resize', this.switchView.bind(this));
   };
 
-  menio.prototype.switchView = function() {
+  Menio.prototype.switchView = function() {
     if (window.innerWidth() < this.breakpoint) {
       this.element.classList.add('mobile');
     }
