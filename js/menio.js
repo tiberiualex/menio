@@ -3,6 +3,7 @@
 
   var Menio = function Menio(options) {
     this.element = document.querySelector(options.element);
+    this.menu = this.element.querySelector('ul');
     this.breakpoint = options.breakpoint;
     this.autoBreakpoint = false;
     this.init();
@@ -11,8 +12,9 @@
   window.Menio = Menio;
 
   Menio.prototype.init = function() {
-    this.switchView();
+    this.createElements();
     this.addBindings();
+    this.switchView();
   };
 
   Menio.prototype.addBindings = function() {
@@ -27,8 +29,19 @@
             wait = false;
           }, 150);
         }
-      }
+      };
     }).call(this));
+
+    this.toggleButton.addEventListener('click', (function() {
+      this.element.classList.toggle('menu-visible');
+    }).bind(this));
+  };
+
+  Menio.prototype.createElements = function() {
+    this.toggleButton = document.createElement('button');
+    this.toggleButton.innerHTML = 'Menu';
+    this.toggleButton.classList.add('toggle-button');
+    this.element.insertBefore(this.toggleButton, this.menu);
   };
 
   Menio.prototype.switchView = function() {
@@ -46,9 +59,11 @@
       this.autoBreakpoint = true;
       this.breakpoint = 0;
 
-      for (var i = 0; i < this.element.children.length; i++) {
-        this.breakpoint += this.element.children[i].offsetWidth;
+      for (var i = 0; i < this.menu.children.length; i++) {
+        this.breakpoint += this.menu.children[i].offsetWidth;
       }
+
+      this.switchView();
     }
   };
 })();

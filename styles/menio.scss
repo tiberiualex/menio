@@ -6,21 +6,53 @@ $menu-font-size: 14px;
   font-family: Helvetica, Arial, sans-serif;
   line-height: 1;
   background-color: $menu-bg;
-  display: flex;
-  flex-flow: row wrap;
 
-  &.mobile {
-    flex-flow: column wrap;
+  &, * {
+    box-sizing: border-box;
   }
 
-  &, ul {
+  .toggle-button {
+    display: none;
+    border: 0;
+    padding: 8px 15px;
+    width: 100%;
+    font-size: $menu-font-size;
+    line-height: 1;
+    text-align: left;
+    appearance: none;
+    background: none;
+    color: $menu-color;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  ul {
     padding: 0;
     margin: 0;
     list-style: none;
   }
 
-  > li {
-  	
+  > ul {
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  &.mobile {
+    > ul {
+      display: none;
+      flex-flow: column wrap;
+    }
+
+    .toggle-button {
+      display: block;
+    }
+
+    &.menu-visible > ul {
+      display: block;
+    }
   }
 
   a {
