@@ -11,6 +11,12 @@
 
   window.Menio = Menio;
 
+  Menio.prototype.CssClasses = {
+    IS_MOBILE: 'mobile',
+    TOGGLE_BUTTON: 'toggle-button',
+    MENU_VISIBLE: 'menu-visible',
+  };
+
   Menio.prototype.init = function() {
     this.createElements();
     this.addBindings();
@@ -33,14 +39,14 @@
     }).call(this));
 
     this.toggleButton.addEventListener('click', (function() {
-      this.element.classList.toggle('menu-visible');
+      this.element.classList.toggle(this.CssClasses.MENU_VISIBLE);
     }).bind(this));
   };
 
   Menio.prototype.createElements = function() {
     this.toggleButton = document.createElement('button');
     this.toggleButton.innerHTML = 'Menu';
-    this.toggleButton.classList.add('toggle-button');
+    this.toggleButton.classList.add(this.CssClasses.TOGGLE_BUTTON);
     this.element.insertBefore(this.toggleButton, this.menu);
   };
 
@@ -49,10 +55,10 @@
       var width = this.autoBreakpoint ? this.element.offsetWidth : window.innerWidth;
 
       if (width < this.breakpoint) {
-        this.element.classList.add('mobile');
+        this.element.classList.add(this.CssClasses.IS_MOBILE);
       }
       else {
-        this.element.classList.remove('mobile');
+        this.element.classList.remove(this.CssClasses.IS_MOBILE);
       }
     }
     else {
