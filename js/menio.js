@@ -23,24 +23,15 @@
     this.switchView();
   };
 
-  Menio.prototype.addBindings = function() {
-    window.addEventListener('resize', (function() {
-      var _this = this;
-      var wait = false;
-      return function() {
-        if (!wait) {
-          _this.switchView();
-          wait = true;
-          setTimeout(function() {
-            wait = false;
-          }, 150);
-        }
-      };
-    }).call(this));
+  Menio.prototype.boundMethod = function(name) {
+    return this['_' + name + '_'] || Object.defineProperty(
+      this, '_' + name + '_', {value: this[name].bind(this)}
+    )['_' + name + '_'];
+  };
 
-    this.toggleButton.addEventListener('click', (function() {
-      this.element.classList.toggle(this.CssClasses_.MENU_VISIBLE);
-    }).bind(this));
+  Menio.prototype.addBindings = function() {
+    window.addEventListener('resize', this.boundMethod('switchView'));
+    this.toggleButton.addEventListener('click', this.boundMethod('toggleMenu'));
   };
 
   Menio.prototype.createElements = function() {
@@ -69,5 +60,9 @@
 
       this.switchView();
     }
+  };
+
+  Menio.prototype.toggleMenu = function() {
+    this.element.classList.toggle(this.CssClasses_.MENU_VISIBLE);
   };
 })();
