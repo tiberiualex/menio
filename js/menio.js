@@ -3,7 +3,7 @@
 
   var Menio = function Menio(options) {
     this.element = document.querySelector(options.element);
-    this.menu = this.element.querySelector('ul');
+    this.menu = this.element.querySelector('.menu');
     this.breakpoint = options.breakpoint;
     this.autoBreakpoint = false;
     this.init();
@@ -12,13 +12,17 @@
   window.Menio = Menio;
 
   Menio.prototype.CssClasses_ = {
-    IS_MOBILE: 'mobile',
-    TOGGLE_BUTTON: 'toggle-button',
-    MENU_VISIBLE: 'menu-visible',
+    IS_HORIZONTAL: 'menu--horizontal',
+    IS_VERTICAL: 'menu--vertical',
+    HAS_SUBMENU: 'menu__item--submenu-container',
+    MENU_TOGGLE: 'menu-toggle',
+    SUBMENU_TOGGLE: 'submenu-toggle',
+    MENU_VISIBLE: 'menu--visible',
+    SUBMENU_VISIBLE: 'submenu--visible'
   };
 
   Menio.prototype.init = function() {
-    this.createElements();
+    this.setupMarkup();
     this.addBindings();
     this.switchView();
   };
@@ -34,11 +38,20 @@
     this.toggleButton.addEventListener('click', this.boundMethod('toggleMenu'));
   };
 
-  Menio.prototype.createElements = function() {
+  Menio.prototype.setupMarkup = function() {
     this.toggleButton = document.createElement('button');
     this.toggleButton.innerHTML = 'Menu';
-    this.toggleButton.classList.add(this.CssClasses_.TOGGLE_BUTTON);
+    this.toggleButton.classList.add(this.CssClasses_.MENU_TOGGLE);
     this.element.insertBefore(this.toggleButton, this.menu);
+
+    for (var i = 0; i < this.menu.querySelectorAll('ul').length; i++) {
+      var submenu = this.menu.querySelectorAll('ul')[i];
+      var toggleSubmenu = document.createElement('button');
+
+      toggleSubmenu.classList.add(this.CssClasses_.SUBMENU_TOGGLE);
+      submenu.parentElement.classList.add(this.CssClasses_.HAS_SUBMENU);
+      submenu.parentElement.insertBefore(toggleSubmenu, submenu);
+    }
   };
 
   Menio.prototype.switchView = function() {
@@ -46,9 +59,11 @@
       var width = this.autoBreakpoint ? this.element.offsetWidth : window.innerWidth;
 
       if (width < this.breakpoint) {
-        this.element.classList.add(this.CssClasses_.IS_MOBILE);
+        this.menu.classList.add(this.CssClasses_.IS_VERTICAL);
+        this.menu.classList.remove(this.CssClasses_.IS_HORIZONTAL);
       } else {
-        this.element.classList.remove(this.CssClasses_.IS_MOBILE);
+        this.menu.classList.add(this.CssClasses_.IS_HORIZONTAL);
+        this.menu.classList.remove(this.CssClasses_.IS_VERTICAL);
       }
     } else {
       this.autoBreakpoint = true;

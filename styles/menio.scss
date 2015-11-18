@@ -11,7 +11,7 @@ $menu-font-size: 14px;
     box-sizing: border-box;
   }
 
-  .toggle-button {
+  .menu-toggle {
     display: none;
     border: 0;
     padding: 8px 15px;
@@ -33,11 +33,33 @@ $menu-font-size: 14px;
     padding: 0;
     margin: 0;
     list-style: none;
+    background-color: $menu-bg;
+
+    ul {
+      position: absolute;
+      display: none;
+    }
   }
 
   > ul {
     display: flex;
     flex-flow: row wrap;
+  }
+
+  li {
+    position: relative;
+
+    &:hover ul {
+      display: block;
+    }
+  }
+
+  a {
+    display: inline-block;
+    padding: 8px 15px;
+    font-size: $menu-font-size;
+    text-decoration: none;
+    color: $menu-color;
   }
 
   &.mobile {
@@ -53,13 +75,13 @@ $menu-font-size: 14px;
     &.menu-visible > ul {
       display: block;
     }
-  }
 
-  a {
-    display: block;
-    padding: 8px 15px;
-    font-size: $menu-font-size;
-    text-decoration: none;
-    color: $menu-color;
+    ul {
+      position: relative;
+    }
+
+    a {
+      display: block;
+    }
   }
 }
