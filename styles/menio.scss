@@ -10,8 +10,17 @@ $menu-font-size: 14px;
   &, * {
     box-sizing: border-box;
   }
+}
 
-  .menu-toggle {
+.menu {
+  &, ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    background-color: $menu-bg;
+  }
+
+  &-toggle {
     display: none;
     border: 0;
     padding: 8px 15px;
@@ -23,65 +32,39 @@ $menu-font-size: 14px;
     background: none;
     color: $menu-color;
     cursor: pointer;
-
-    &:focus {
-      outline: none;
-    }
   }
 
-  ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    background-color: $menu-bg;
-
-    ul {
-      position: absolute;
-      display: none;
-    }
-  }
-
-  > ul {
-    display: flex;
-    flex-flow: row wrap;
-  }
-
-  li {
-    position: relative;
-
-    &:hover ul {
-      display: block;
-    }
-  }
-
-  a {
-    display: inline-block;
+  &__link {
     padding: 8px 15px;
     font-size: $menu-font-size;
     text-decoration: none;
     color: $menu-color;
   }
 
-  &.mobile {
-    > ul {
-      display: none;
-      flex-flow: column wrap;
-    }
+  &--horizontal {
+    display: flex;
+    flex-flow: row-wrap;
 
-    .toggle-button {
+    .menu__link {
+      display: inline-block;
+    }
+  }
+
+  &--vertical {
+    .menu-toggle {
       display: block;
     }
 
-    &.menu-visible > ul {
+    .menu__link {
       display: block;
     }
+  }
+}
 
-    ul {
-      position: relative;
-    }
+.submenu {
+  display: none;
 
-    a {
-      display: block;
-    }
+  &-toggle {
+    display: none;
   }
 }
