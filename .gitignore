@@ -1,1 +1,2 @@
-prepros.cfg
+# Dependencies
+node_modules/

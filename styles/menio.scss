@@ -13,6 +13,9 @@ $menu-font-size: 14px;
 }
 
 .menu {
+  display: flex;
+  flex-flow: row-wrap;
+
   &, ul {
     padding: 0;
     margin: 0;
@@ -42,15 +45,14 @@ $menu-font-size: 14px;
   }
 
   &--horizontal {
-    display: flex;
-    flex-flow: row-wrap;
-
     .menu__link {
       display: inline-block;
     }
   }
 
   &--vertical {
+    flex-flow: column;
+
     .menu-toggle {
       display: block;
     }
