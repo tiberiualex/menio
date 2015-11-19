@@ -16,6 +16,7 @@
     IS_VERTICAL: 'menu--vertical',
     HAS_SUBMENU: 'menu__item--submenu-container',
     MENU_TOGGLE: 'menu-toggle',
+    MENU_TOGGLE_VISIBLE: 'menu-toggle--visible',
     SUBMENU_TOGGLE: 'submenu-toggle',
     MENU_VISIBLE: 'menu--visible',
     SUBMENU_VISIBLE: 'submenu--visible'
@@ -61,9 +62,11 @@
       if (width < this.breakpoint) {
         this.menu.classList.add(this.CssClasses_.IS_VERTICAL);
         this.menu.classList.remove(this.CssClasses_.IS_HORIZONTAL);
+        this.toggleButton.classList.add(this.CssClasses_.MENU_TOGGLE_VISIBLE);
       } else {
         this.menu.classList.add(this.CssClasses_.IS_HORIZONTAL);
-        this.menu.classList.remove(this.CssClasses_.IS_VERTICAL);
+        this.menu.classList.remove(this.CssClasses_.IS_VERTICAL, this.CssClasses_.MENU_VISIBLE);
+        this.toggleButton.classList.remove(this.CssClasses_.MENU_TOGGLE_VISIBLE);
       }
     } else {
       this.autoBreakpoint = true;
@@ -78,6 +81,6 @@
   };
 
   Menio.prototype.toggleMenu = function() {
-    this.element.classList.toggle(this.CssClasses_.MENU_VISIBLE);
+    this.menu.classList.toggle(this.CssClasses_.MENU_VISIBLE);
   };
 })();

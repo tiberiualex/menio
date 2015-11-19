@@ -31,6 +31,10 @@
     background: none;
     color: #fff;
     cursor: pointer; }
+    .menu-toggle:focus {
+      outline: 0; }
+    .menu-toggle--visible {
+      display: block; }
   .menu__link {
     padding: 8px 15px;
     font-size: 14px;
@@ -39,9 +43,14 @@
   .menu--horizontal .menu__link {
     display: inline-block; }
   .menu--vertical {
+    display: none;
     -webkit-flex-flow: column;
     -ms-flex-flow: column;
     flex-flow: column; }
+    .menu--vertical.menu--visible {
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex; }
     .menu--vertical .menu-toggle {
       display: block; }
     .menu--vertical .menu__link {

@@ -35,6 +35,14 @@ $menu-font-size: 14px;
     background: none;
     color: $menu-color;
     cursor: pointer;
+
+    &:focus {
+      outline: 0;
+    }
+
+    &--visible {
+      display: block;
+    }
   }
 
   &__link {
@@ -51,7 +59,12 @@ $menu-font-size: 14px;
   }
 
   &--vertical {
+    display: none;
     flex-flow: column;
+
+    &.menu--visible {
+      display: flex;
+    }
 
     .menu-toggle {
       display: block;
