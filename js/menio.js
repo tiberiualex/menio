@@ -2,6 +2,7 @@
   'use strict';
 
   var Menio = function Menio(options) {
+    this.options = options;
     this.element = document.querySelector(options.element);
     this.menu = this.element.querySelector('.menu');
     this.breakpoint = options.breakpoint;
