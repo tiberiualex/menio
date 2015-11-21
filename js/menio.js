@@ -50,9 +50,12 @@
       var submenu = this.menu.querySelectorAll('ul')[i];
       var toggleSubmenu = document.createElement('button');
 
+      toggleSubmenu.addEventListener('click', this.boundMethod('toggleSubmenu'));
+
       toggleSubmenu.classList.add(this.CssClasses_.SUBMENU_TOGGLE);
       submenu.parentElement.classList.add(this.CssClasses_.HAS_SUBMENU);
       submenu.parentElement.insertBefore(toggleSubmenu, submenu);
+      console.log(toggleSubmenu);
     }
   };
 
@@ -83,5 +86,9 @@
 
   Menio.prototype.toggleMenu = function() {
     this.menu.classList.toggle(this.CssClasses_.MENU_VISIBLE);
+  };
+
+  Menio.prototype.toggleSubmenu = function() {
+    console.log('Toggle Submenu');
   };
 })();

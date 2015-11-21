@@ -42,6 +42,8 @@
     color: #fff; }
   .menu--horizontal .menu__link {
     display: inline-block; }
+  .menu--horizontal .submenu-toggle {
+    display: none; }
   .menu--vertical {
     display: none;
     -webkit-flex-flow: column;
@@ -53,10 +55,24 @@
       display: flex; }
     .menu--vertical .menu-toggle {
       display: block; }
+    .menu--vertical .menu__item {
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex; }
     .menu--vertical .menu__link {
-      display: block; }
+      -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+      flex-grow: 1; }
 
 .submenu {
   display: none; }
   .submenu-toggle {
-    display: none; }
+    border: 0;
+    width: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer; }
+    .submenu-toggle:focus {
+      outline: 0; }

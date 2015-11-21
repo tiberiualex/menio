@@ -56,6 +56,10 @@ $menu-font-size: 14px;
     .menu__link {
       display: inline-block;
     }
+
+    .submenu-toggle {
+      display: none;
+    }
   }
 
   &--vertical {
@@ -70,8 +74,12 @@ $menu-font-size: 14px;
       display: block;
     }
 
+    .menu__item {
+      display: flex;
+    }
+
     .menu__link {
-      display: block;
+      flex-grow: 1;
     }
   }
 }
@@ -80,6 +88,14 @@ $menu-font-size: 14px;
   display: none;
 
   &-toggle {
-    display: none;
+    border: 0;
+    width: 30px;
+    background: rgba(255,255,255,.1);
+    appearance: none;
+    cursor: pointer;
+
+    &:focus {
+      outline: 0;
+    }
   }
 }
