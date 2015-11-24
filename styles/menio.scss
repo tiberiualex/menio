@@ -76,6 +76,7 @@ $menu-font-size: 14px;
 
     .menu__item {
       display: flex;
+      flex-wrap: wrap;
     }
 
     .menu__link {
@@ -86,6 +87,11 @@ $menu-font-size: 14px;
 
 .submenu {
   display: none;
+  width: 100%;
+
+  &--visible {
+    display: block;
+  }
 
   &-toggle {
     border: 0;

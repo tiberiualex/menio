@@ -24,8 +24,7 @@
   };
 
   Menio.prototype.init = function() {
-    this.setupMarkup();
-    this.addBindings();
+    this.setupMenu();
     this.switchView();
   };
 
@@ -35,27 +34,24 @@
     )['_' + name + '_'];
   };
 
-  Menio.prototype.addBindings = function() {
+  Menio.prototype.setupMenu = function() {
     window.addEventListener('resize', this.boundMethod('switchView'));
-    this.toggleButton.addEventListener('click', this.boundMethod('toggleMenu'));
-  };
 
-  Menio.prototype.setupMarkup = function() {
     this.toggleButton = document.createElement('button');
     this.toggleButton.innerHTML = 'Menu';
     this.toggleButton.classList.add(this.CssClasses_.MENU_TOGGLE);
     this.element.insertBefore(this.toggleButton, this.menu);
+    this.toggleButton.addEventListener('click', this.boundMethod('toggleMenu'));
 
     for (var i = 0; i < this.menu.querySelectorAll('ul').length; i++) {
       var submenu = this.menu.querySelectorAll('ul')[i];
-      var toggleSubmenu = document.createElement('button');
+      var submenuButton = document.createElement('button');
 
-      toggleSubmenu.addEventListener('click', this.boundMethod('toggleSubmenu'));
+      submenuButton.addEventListener('click', this.boundMethod('toggleSubmenu').bind(event, submenu));
 
-      toggleSubmenu.classList.add(this.CssClasses_.SUBMENU_TOGGLE);
+      submenuButton.classList.add(this.CssClasses_.SUBMENU_TOGGLE);
       submenu.parentElement.classList.add(this.CssClasses_.HAS_SUBMENU);
-      submenu.parentElement.insertBefore(toggleSubmenu, submenu);
-      console.log(toggleSubmenu);
+      submenu.parentElement.insertBefore(submenuButton, submenu);
     }
   };
 
@@ -88,7 +84,7 @@
     this.menu.classList.toggle(this.CssClasses_.MENU_VISIBLE);
   };
 
-  Menio.prototype.toggleSubmenu = function() {
-    console.log('Toggle Submenu');
+  Menio.prototype.toggleSubmenu = function(submenu) {
+    submenu.classList.toggle(this.CssClasses_.SUBMENU_VISIBLE);
   };
 })();
