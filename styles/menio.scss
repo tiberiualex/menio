@@ -15,12 +15,12 @@ $menu-font-size: 14px;
 .menu {
   display: flex;
   flex-flow: row-wrap;
+  background-color: $menu-bg;
 
   &, ul {
     padding: 0;
     margin: 0;
     list-style: none;
-    background-color: $menu-bg;
   }
 
   &-toggle {
@@ -53,8 +53,19 @@ $menu-font-size: 14px;
   }
 
   &--horizontal {
+    .menu__item--submenu-container {
+      &:hover > .submenu {
+        display: block;
+      }
+    }
+
     .menu__link {
       display: inline-block;
+    }
+
+    .submenu {
+      position: absolute;
+      background-color: $menu-bg;
     }
 
     .submenu-toggle {
@@ -82,21 +93,37 @@ $menu-font-size: 14px;
     .menu__link {
       flex-grow: 1;
     }
+
+    .submenu {
+      width: 100%;
+      background-color: lighten($menu-bg, 5%);
+    }
   }
 }
 
 .submenu {
   display: none;
-  width: 100%;
 
   &--visible {
     display: block;
   }
 
+  &__item {
+    display: block;
+  }
+
+  &__link {
+    display: block;
+    padding: 8px 15px;
+    font-size: $menu-font-size;
+    text-decoration: none;
+    color: $menu-color;
+  }
+
   &-toggle {
     border: 0;
     width: 30px;
-    background: rgba(255,255,255,.1);
+    background: lighten($menu-bg, 5%);
     appearance: none;
     cursor: pointer;
 

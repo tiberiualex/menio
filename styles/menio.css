@@ -11,12 +11,12 @@
   display: flex;
   -webkit-flex-flow: row-wrap;
   -ms-flex-flow: row-wrap;
-  flex-flow: row-wrap; }
+  flex-flow: row-wrap;
+  background-color: #333; }
   .menu, .menu ul {
     padding: 0;
     margin: 0;
-    list-style: none;
-    background-color: #333; }
+    list-style: none; }
   .menu-toggle {
     display: none;
     border: 0;
@@ -40,8 +40,13 @@
     font-size: 14px;
     text-decoration: none;
     color: #fff; }
+  .menu--horizontal .menu__item--submenu-container:hover > .submenu {
+    display: block; }
   .menu--horizontal .menu__link {
     display: inline-block; }
+  .menu--horizontal .submenu {
+    position: absolute;
+    background-color: #333; }
   .menu--horizontal .submenu-toggle {
     display: none; }
   .menu--vertical {
@@ -66,16 +71,26 @@
       -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
       flex-grow: 1; }
+    .menu--vertical .submenu {
+      width: 100%;
+      background-color: #404040; }
 
 .submenu {
-  display: none;
-  width: 100%; }
+  display: none; }
   .submenu--visible {
     display: block; }
+  .submenu__item {
+    display: block; }
+  .submenu__link {
+    display: block;
+    padding: 8px 15px;
+    font-size: 14px;
+    text-decoration: none;
+    color: #fff; }
   .submenu-toggle {
     border: 0;
     width: 30px;
-    background: rgba(255, 255, 255, 0.1);
+    background: #404040;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
